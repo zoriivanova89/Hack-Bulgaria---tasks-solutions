@@ -1,0 +1,8 @@
+#include <math.h>
+
+float fill_tetrahedron(int num)
+{
+    float result;
+    result = pow((num/10),3)/(6*sqrt(2));
+    return result;
+}
