@@ -1,0 +1,42 @@
+#include <math.h>
+
+int tetrahedron_filled(int tetrahedrons[], int water)    
+{  
+    int size = sizeof(tetrahedrons);
+    float Vol[size];
+    int i;
+    float temp;
+    for(i=0;i<size;i++)      // calculate the volume of each tetrahedron
+    {
+      Vol[i]=pow((tetrahedrons[i]/10),3)/(6*sqrt(2)); 
+    }
+    for(i=0;i<size;i++)  // array sorting (from min to max)... help from google
+    {
+        for(i=0;i<(size-1);i++)
+        {
+            if (Vol[i]>Vol[i+1])    //swap two neighbor elements
+            {
+                temp = Vol[i];
+                Vol[i] = Vol[i+1];
+                Vol[i+1] = temp;
+            }
+        }
+    }
+
+   for (i=0;i<size;i++)     // decrease the water volume with every tetrahedron volume 
+   {                        // until it is not enought to fulfill the next tetrahedron
+        if(Vol[i]<=water)
+        {
+            water = water - Vol[i];
+        }
+        else 
+        {
+            return i;       // i is equal to the count of the fulfilled tetrahedrons
+        }
+   }
+ 
+ 
+    
+}
+
+
